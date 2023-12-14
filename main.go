@@ -11,8 +11,20 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.GET("/getData", getData)
-	router.GET("/getQueryString", getQueryString)
+	
+
+	admin := router.Group("/admin")
+	{
+		admin.GET("/getData", getData)
+	}
+
+	client := router.Group("/client")
+	{
+		client.GET("/getQueryString", getQueryString)
+	}
+
+	// router.GET("/getData", getData)
+	// router.GET("/getQueryString", getQueryString)
 	router.GET("/getUrlData/:name/:age", getUrlData)
 	router.POST("/getDataPost", getDataPost)
 	// router.Run(":5000")
