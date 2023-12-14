@@ -2,6 +2,8 @@ package main
 
 import (
 	"io/ioutil"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +15,14 @@ func main() {
 	router.GET("/getQueryString", getQueryString)
 	router.GET("/getUrlData/:name/:age", getUrlData)
 	router.POST("/getDataPost", getDataPost)
-	router.Run(":5000")
+	// router.Run(":5000")
+	server := &http.Server{
+		Addr:         ":5000",
+		Handler:      router,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+	server.ListenAndServe()
 }
 
 func getData(c *gin.Context) {
@@ -22,7 +31,7 @@ func getData(c *gin.Context) {
 	})
 }
 
-//http://localhost:5000/getQueryString?name=James&age=15
+// http://localhost:5000/getQueryString?name=James&age=15
 func getQueryString(c *gin.Context) {
 	name := c.Query("name")
 	age := c.Query("age")
@@ -32,7 +41,8 @@ func getQueryString(c *gin.Context) {
 		"age":  age,
 	})
 }
-//http://localhost:5000/getUrlData/mark/14
+
+// http://localhost:5000/getUrlData/mark/14
 func getUrlData(c *gin.Context) {
 	name := c.Param("name")
 	age := c.Param("age")
