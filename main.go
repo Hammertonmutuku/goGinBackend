@@ -1,6 +1,7 @@
 package main
 
 import (
+	middleware "goGinBackend/Middleware"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -9,7 +10,10 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	// router := gin.Default()
+	router := gin.New()
+	// router.Use(middleware.Authenticate) // pass to the whole application
+	router.GET("/getData1", middleware.Authenticate,middleware.AddHeader, getData1)
 
 	auth := gin.BasicAuth(gin.Accounts{
 		"user": "pass",
@@ -20,9 +24,11 @@ func main() {
 		admin.GET("/getData", getData)
 	}
 
-	client := router.Group("/client")
+	client := router.Group("/client", middleware.Authenticate)
 	{
 		client.GET("/getQueryString", getQueryString)
+		client.GET("/getData2", getData2)
+		client.GET("/getData3", getData3)
 	}
 
 	// router.GET("/getData", getData)
@@ -42,6 +48,24 @@ func main() {
 func getData(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"data": "Hi I am GIN Framework",
+	})
+}
+
+func getData1(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"data": "Hi I 1 am GIN Framework",
+	})
+}
+
+func getData2(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"data": "Hi I 2 am GIN Framework",
+	})
+}
+
+func getData3(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"data": "Hi I 3 am GIN Framework",
 	})
 }
 
