@@ -11,9 +11,11 @@ import (
 func main() {
 	router := gin.Default()
 
-	
+	auth := gin.BasicAuth(gin.Accounts{
+		"user": "pass",
+	})
 
-	admin := router.Group("/admin")
+	admin := router.Group("/admin", auth)
 	{
 		admin.GET("/getData", getData)
 	}
