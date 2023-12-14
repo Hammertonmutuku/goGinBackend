@@ -1,0 +1,2 @@
+{127.0.0.1 - [Thu, 14 Dec 2023 22:47:26 EAT]  "GET /getData1 HTTP/1.1 200 0s "Thunder Client (https://www.thunderclient.com)" "} 
+{127.0.0.1 - [Thu, 14 Dec 2023 22:47:28 EAT]  "GET /getData1 HTTP/1.1 200 0s "Thunder Client (https://www.thunderclient.com)" "} 

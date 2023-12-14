@@ -1,19 +1,33 @@
 package main
 
 import (
+	logger "goGinBackend/Logger"
 	middleware "goGinBackend/Middleware"
+	"io"
 	"io/ioutil"
-	"net/http"
-	"time"
+	"log"
+	"os"
+
+	"github.com/mattn/go-colorable"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// router := gin.Default()
 	router := gin.New()
+
+	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
+		log.Printf("endpoint formatted information is %v %v %v %v/n", httpMethod, absolutePath, handlerName, nuHandlers)
+	}
+
+	gin.ForceConsoleColor()
+	gin.DefaultWriter = colorable.NewColorableStdout()
 	// router.Use(middleware.Authenticate) // pass to the whole application
-	router.GET("/getData1", middleware.Authenticate,middleware.AddHeader, getData1)
+	f, _ := os.Create("ginLogging.Log")
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
+	router.Use(gin.LoggerWithFormatter(logger.FormatLogs))
+	router.GET("/getData1", middleware.Authenticate, middleware.AddHeader, getData1)
 
 	auth := gin.BasicAuth(gin.Accounts{
 		"user": "pass",
@@ -35,14 +49,14 @@ func main() {
 	// router.GET("/getQueryString", getQueryString)
 	router.GET("/getUrlData/:name/:age", getUrlData)
 	router.POST("/getDataPost", getDataPost)
-	// router.Run(":5000")
-	server := &http.Server{
-		Addr:         ":5000",
-		Handler:      router,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 10 * time.Second,
-	}
-	server.ListenAndServe()
+	router.Run(":5000")
+	// server := &http.Server{
+	// 	Addr:         ":5000",
+	// 	Handler:      router,
+	// 	ReadTimeout:  10 * time.Second,
+	// 	WriteTimeout: 10 * time.Second,
+	// }
+	// server.ListenAndServe()
 }
 
 func getData(c *gin.Context) {
