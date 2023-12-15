@@ -1,2 +1,4 @@
-{127.0.0.1 - [Thu, 14 Dec 2023 22:47:26 EAT]  "GET /getData1 HTTP/1.1 200 0s "Thunder Client (https://www.thunderclient.com)" "} 
-{127.0.0.1 - [Thu, 14 Dec 2023 22:47:28 EAT]  "GET /getData1 HTTP/1.1 200 0s "Thunder Client (https://www.thunderclient.com)" "} 
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :5000
+{127.0.0.1 - [Fri, 15 Dec 2023 14:00:55 EAT]  "GET /getData1 HTTP/1.1 200 5.0239ms "Thunder Client (https://www.thunderclient.com)" "} 

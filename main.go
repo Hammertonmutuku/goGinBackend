@@ -9,12 +9,36 @@ import (
 	"os"
 
 	"github.com/mattn/go-colorable"
+	"github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	logrus.SetLevel(logrus.TraceLevel)
+
+	logrus.SetReportCaller(true)
+
+	logrus.SetFormatter(&logrus.JSONFormatter{
+		DisableTimestamp: true,
+		PrettyPrint:      true,
+	})
+
+	f, _ := os.Create("logrus.log")
+
+	multi := io.MultiWriter(f, os.Stdout)
+
+	logrus.SetOutput(multi)
+	logrus.Traceln("trace")
+	logrus.Debugln("debug")
+	logrus.Infoln("info")
+	logrus.Warnln("warn")
+	logrus.Errorln("error")
+	// logrus.Panicln("panic")
+
 	router := gin.New()
+
+	logrus.Println("Hi I am logrus")
 
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Printf("endpoint formatted information is %v %v %v %v/n", httpMethod, absolutePath, handlerName, nuHandlers)
@@ -23,8 +47,8 @@ func main() {
 	gin.ForceConsoleColor()
 	gin.DefaultWriter = colorable.NewColorableStdout()
 	// router.Use(middleware.Authenticate) // pass to the whole application
-	f, _ := os.Create("ginLogging.Log")
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	f1, _ := os.Create("ginLogging.Log")
+	gin.DefaultWriter = io.MultiWriter(f1, os.Stdout)
 
 	router.Use(gin.LoggerWithFormatter(logger.FormatLogs))
 	router.GET("/getData1", middleware.Authenticate, middleware.AddHeader, getData1)
@@ -66,6 +90,24 @@ func getData(c *gin.Context) {
 }
 
 func getData1(c *gin.Context) {
+
+	logrus.WithField("Info", "CreateFile").Info("starting file creation")
+	logrus.WithField("Debug", "CreateFile").Debug("Starting File Creation")
+ 
+	f, err:= os.Create("dhdhdj/dddjjd/sdkd/logrus.log")
+
+	if err != nil {
+		logrus.WithFields(logrus.Fields{
+			"Method" : "CreateFile",
+			"error" : true,
+		}).Error(err.Error())
+	}
+
+    logrus.WithField("Debug", "CreateFile").Debug("Starting File Creation")
+
+	multi := io.MultiWriter(f, os.Stdout)
+	logrus.SetOutput(multi)
+	
 	c.JSON(200, gin.H{
 		"data": "Hi I 1 am GIN Framework",
 	})
@@ -112,3 +154,11 @@ func getDataPost(c *gin.Context) {
 		"bodyData": string(value),
 	})
 }
+
+//Trace
+//Debug
+//Info
+//Warn
+//Error
+//Fatal
+//Panic

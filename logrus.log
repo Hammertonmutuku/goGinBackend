@@ -1,0 +1,65 @@
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:32",
+  "func": "main.main",
+  "level": "trace",
+  "msg": "trace"
+}
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:33",
+  "func": "main.main",
+  "level": "debug",
+  "msg": "debug"
+}
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:34",
+  "func": "main.main",
+  "level": "info",
+  "msg": "info"
+}
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:35",
+  "func": "main.main",
+  "level": "warning",
+  "msg": "warn"
+}
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:36",
+  "func": "main.main",
+  "level": "error",
+  "msg": "error"
+}
+{
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:41",
+  "func": "main.main",
+  "level": "info",
+  "msg": "Hi I am logrus"
+}
+{
+  "Info": "CreateFile",
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:94",
+  "func": "main.getData1",
+  "level": "info",
+  "msg": "starting file creation"
+}
+{
+  "Debug": "CreateFile",
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:95",
+  "func": "main.getData1",
+  "level": "debug",
+  "msg": "Starting File Creation"
+}
+{
+  "Method": "CreateFile",
+  "error": true,
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:103",
+  "func": "main.getData1",
+  "level": "error",
+  "msg": "open dhdhdj/dddjjd/sdkd/logrus.log: The system cannot find the path specified."
+}
+{
+  "Debug": "CreateFile",
+  "file": "C:/Users/v-hmuinde/OneDrive - Microsoft/Desktop/Projects/Backend/goGinBackend/main.go:106",
+  "func": "main.getData1",
+  "level": "debug",
+  "msg": "Starting File Creation"
+}
